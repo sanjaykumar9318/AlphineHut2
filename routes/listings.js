@@ -40,13 +40,7 @@ router.get("/:id",async(req,res)=>{
     //     throw new ExpressError(400, result.error); 
     // }
     // (removed duplicate create route)
-router.post("/", (req, res, next) => {
-    // Remove empty string for image so Joi and Mongoose default work
-    if (req.body.listing && req.body.listing.image === "") {
-        delete req.body.listing.image;
-    }
-    next();
-}, validatelisting, wrapasync(async (req, res) => {
+router.post("/", validatelisting, wrapasync(async (req, res) => {
     let newlist = new listing(req.body.listing);
     await newlist.save();
     res.redirect("/listings");
