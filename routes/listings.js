@@ -4,6 +4,7 @@ const wrapasync = require("../utils/wrapasync.js")
 const ExpressError = require("../utils/ExpressError.js")
 const { listingSchema, reviewSchema } = require("../schema.js");
 const listing = require("../models/listing.js")
+const { loginRequired } = require("../utils/middleware.js");
 
 
 const validatelisting = (req, res, next) => {
@@ -22,7 +23,7 @@ router.get("/",wrapasync (async(req,res)=>{
 }))
 
 /*new route*/
-router.get("/new",(req,res)=>{
+router.get("/new",loginRequired,(req,res)=>{
     res.render("listings/new")
 })
 
@@ -44,7 +45,7 @@ router.get("/:id",async(req,res)=>{
     //     throw new ExpressError(400, result.error); 
     // }
     // (removed duplicate create route)
-router.post("/", validatelisting, wrapasync(async (req, res) => {
+router.post("/",loginRequired, validatelisting, wrapasync(async (req, res) => {
     let newlist = new listing(req.body.listing);
     await newlist.save();
     req.flash("success", "New listing created successfully!");
@@ -54,7 +55,7 @@ router.post("/", validatelisting, wrapasync(async (req, res) => {
 
 
 /*edit route*/
-router.get("/:id/edit",wrapasync (async(req,res)=>{
+router.get("/:id/edit",loginRequired,wrapasync (async(req,res)=>{
     let{id}=req.params;
     const list = await listing.findById(id)
     if(!list){
@@ -65,7 +66,7 @@ router.get("/:id/edit",wrapasync (async(req,res)=>{
 }))
 
 /*update route*/
-router.put("/:id",validatelisting,wrapasync (async(req,res)=>{
+router.put("/:id",loginRequired,validatelisting,wrapasync (async(req,res)=>{
     let {id} = req.params
     await listing.findByIdAndUpdate(id,{...req.body.listing});
     req.flash("success", "Listing updated successfully!");
@@ -74,7 +75,7 @@ router.put("/:id",validatelisting,wrapasync (async(req,res)=>{
 
 
 /*delete route*/
-router.delete("/:id",wrapasync (async(req,res,next)=>{
+router.delete("/:id",loginRequired,wrapasync (async(req,res,next)=>{
     let {id} = req.params
     console.log("delete ",id)
     let result=await listing.findByIdAndDelete(id);
