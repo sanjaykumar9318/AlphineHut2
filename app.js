@@ -10,6 +10,10 @@ const listingsRoutes = require("./routes/listings.js")
 const reviewRoutes = require("./routes/review.js")
 const session = require("express-session")
 const flash = require("connect-flash")
+const passport = require("passport")
+const user = require("./models/user.js")
+const LocalStrategy = require("passport-local")
+const userRoutes = require("./routes/user.js")
 
 
 
@@ -29,8 +33,15 @@ const sessionOptions = {
         maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days,
         httponly: true, // Helps prevent XSS attacks
 }}
+
 app.use(session(sessionOptions));
 app.use(flash());
+
+app.use(passport.initialize());
+app.use(passport.session()); // use to identify the user as they browse from page to page.the series of reponse each associated with same user is called session.
+passport.use(new LocalStrategy(user.authenticate())); // authenticate the user using passport-local strategy
+passport.serializeUser(user.serializeUser()); // serialize the user to store in session
+passport.deserializeUser(user.deserializeUser()); // deserialize the user from session
 
 async function main(){
     await mongoose.connect('mongodb://127.0.0.1:27017/AlphineHut');
@@ -47,8 +58,22 @@ app.use((req, res, next) => {
     res.locals.error = req.flash("error");
     next();
 })
+
+// app.get("/demouser", async (req, res) => {
+    
+//     let fakesuser =await new user({
+//         email:"student@gmail.com",
+//         username:"student",
+//     })
+//    let registereduser= await user.register(fakesuser,"student") //this only check if username is unique
+// res.send(registereduser)
+// })
+
+
+
 app.use("/listings", listingsRoutes);
 app.use("/listings/:id/reviews", reviewRoutes);
+app.use("/", userRoutes);
 
 
 app.all("*",(req,res,next)=>{
