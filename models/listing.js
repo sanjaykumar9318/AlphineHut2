@@ -1,6 +1,7 @@
 const mongoose = require("mongoose")
 const schema = mongoose.Schema;
 const review = require("./review")
+const user = require("./user")
 const listingschema = new schema({
     title:{
         type:String,
@@ -20,6 +21,10 @@ const listingschema = new schema({
         type: schema.Types.ObjectId,
         ref: "review"
     }],
+    owner:{
+        type: schema.Types.ObjectId,
+        ref: "user"
+    }
 });
 
 listingschema.post('findOneAndDelete', async(listing)=> {

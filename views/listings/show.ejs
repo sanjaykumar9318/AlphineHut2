@@ -8,6 +8,7 @@
     <img src="<%=list.image%>" class="card-img-top show-img" alt="...">
     <div class="card-body">
     <p class="card-text"><ul>
+        <li><b>OwnedBy:</b> <%=list.owner.username%></li>
         <li><%=list.description%></li>
         <li>&#8377;<%=list.price.toLocaleString("en-IN")%></li>
         <li><%=list.location%></li>
@@ -15,15 +16,21 @@
     </ul></p>
     </div>
     </div>
+    <%if(currentuser&&currentuser._id.equals(list.owner._id)){%>
     <div class="btns">
         <a href="/listings/<%=list._id%>/edit" class="btn btn-dark col-1 offset-3 editclr">edit</a>
         <form method="post" action="/listings/<%=list._id%>?_method=DELETE">
     <button class="btn btn-dark offset-2">delete</button>
     </form>
 </div>
+<% } %>
+
+
+
 
 <div class="col-8 offset-3 ">
-    <hr>
+
+    <%if(currentuser){%>
     <h4 class="mt-2">Leave A Review</h4>
     <form method="post" action="/listings/<%=list._id%>/reviews" novalidate class="needs-validation">
         <div class="mb-2 mt-3">
@@ -40,13 +47,14 @@
         </div>
         <button class="mt-2 mb-3 btn btn-outline-dark">Submit</button>
     </form>
+    <%}%>
     <hr>
     <h4><b>All Reviews</b></h4>
     <div class="row mt-3">
     <% for(rev of list.reviews){ %>
     <div class="card col-5 ms-3 mb-3">
         <div class="card-body">
-        <h5 class="card-title">Sanjay  </h5>
+        <h5 class="card-title"><%=rev.author.username%></h5>
             <h5 class="card-text">Rating: <%=rev.rating%></h5>
             <p class="card-text"><%=rev.comment%></p>
         </div>

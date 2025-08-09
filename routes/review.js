@@ -5,6 +5,7 @@ const wrapasync = require("../utils/wrapasync.js")
 const { listingSchema, reviewSchema } = require("../schema.js");
 const listing = require("../models/listing.js")
 const review = require("../models/review")
+const { loginRequired, isowner ,isreviewauthor} = require("../utils/middleware.js");
 
 
 const validateReview = (req, res, next) => {
@@ -17,10 +18,11 @@ const validateReview = (req, res, next) => {
 }
 
 /*reviews route*/
-router.post("/",validateReview,wrapasync(async(req,res)=>{
+router.post("/",loginRequired,validateReview,wrapasync(async(req,res)=>{
     let {id} = req.params;
     let listingfound = await listing.findById(id);
     let newreview = new review(req.body.review); //this is inserting but in new way
+    newreview.author = req.user._id; // associate the review with the logged-in user
     listingfound.reviews.push(newreview);
     await newreview.save();
     await listingfound.save();
@@ -30,7 +32,7 @@ router.post("/",validateReview,wrapasync(async(req,res)=>{
 
 
 /*delete review route*/
-router.delete("/:reviewId",wrapasync(async(req,res)=>{
+router.delete("/:reviewId",loginRequired,isreviewauthor,wrapasync(async(req,res)=>{
     let {id, reviewId} = req.params;
     await listing.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
     await review.findByIdAndDelete(reviewId);

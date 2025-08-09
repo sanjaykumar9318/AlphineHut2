@@ -4,7 +4,8 @@ const wrapasync = require("../utils/wrapasync.js")
 const ExpressError = require("../utils/ExpressError.js")
 const { listingSchema, reviewSchema } = require("../schema.js");
 const listing = require("../models/listing.js")
-const { loginRequired } = require("../utils/middleware.js");
+const { loginRequired, isowner } = require("../utils/middleware.js");
+
 
 
 const validatelisting = (req, res, next) => {
@@ -30,7 +31,7 @@ router.get("/new",loginRequired,(req,res)=>{
 /*show route*/
 router.get("/:id",async(req,res)=>{
     let {id} = req.params;
-    const list = await listing.findById(id).populate("reviews");
+    const list = await listing.findById(id).populate({path:"reviews",populate:{path:"author"}}).populate("owner"); // Populate the owner field to get user details
     // console.log(list)
     if(!list){
         req.flash("error", "Listing not found!");
@@ -47,6 +48,7 @@ router.get("/:id",async(req,res)=>{
     // (removed duplicate create route)
 router.post("/",loginRequired, validatelisting, wrapasync(async (req, res) => {
     let newlist = new listing(req.body.listing);
+    newlist.owner = req.user._id; // Set the owner to the currently logged-in user
     await newlist.save();
     req.flash("success", "New listing created successfully!");
     res.redirect("/listings");
@@ -55,7 +57,7 @@ router.post("/",loginRequired, validatelisting, wrapasync(async (req, res) => {
 
 
 /*edit route*/
-router.get("/:id/edit",loginRequired,wrapasync (async(req,res)=>{
+router.get("/:id/edit",loginRequired,isowner,wrapasync (async(req,res)=>{
     let{id}=req.params;
     const list = await listing.findById(id)
     if(!list){
@@ -66,7 +68,7 @@ router.get("/:id/edit",loginRequired,wrapasync (async(req,res)=>{
 }))
 
 /*update route*/
-router.put("/:id",loginRequired,validatelisting,wrapasync (async(req,res)=>{
+router.put("/:id",loginRequired,isowner,validatelisting,wrapasync (async(req,res)=>{
     let {id} = req.params
     await listing.findByIdAndUpdate(id,{...req.body.listing});
     req.flash("success", "Listing updated successfully!");
@@ -75,7 +77,7 @@ router.put("/:id",loginRequired,validatelisting,wrapasync (async(req,res)=>{
 
 
 /*delete route*/
-router.delete("/:id",loginRequired,wrapasync (async(req,res,next)=>{
+router.delete("/:id",loginRequired,isowner,wrapasync (async(req,res,next)=>{
     let {id} = req.params
     console.log("delete ",id)
     let result=await listing.findByIdAndDelete(id);

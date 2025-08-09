@@ -19,6 +19,7 @@ main().then(()=>{
 
 const initdb = async()=>{
    await listing.deleteMany({});
+   initdata.data = initdata.data.map((obj) => ({...obj,owner:'6895becff1c2ab4f967b45a7',})); // Assuming you want to set a default owner for all listings
    await listing.insertMany(initdata.data);
    console.log("data was initialized");
 
