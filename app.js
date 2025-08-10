@@ -40,7 +40,7 @@ const dburl = process.env.ATLASDB_URL
 const store = MongoStore.create({
     mongoUrl: dburl,
     crypto:{
-        secret:"keyboardcat"
+        secret:process.env.SECRET
     },
     touchAfter:24*3600 //after how long we should update session info .. like if u dont want to update for every refresh use this like only after 24hrs
 
@@ -52,7 +52,7 @@ store.on("error",()=>{
 
 const sessionOptions = {
     store:store,
-    secret:"keyboardcat",
+    secret:pocess.env.SECRET,
     resave: false,  
     saveUninitialized: true,
     cookie:{
