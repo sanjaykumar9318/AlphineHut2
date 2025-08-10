@@ -9,11 +9,9 @@ const listingschema = new schema({
     },
     description:String,
     image:{
-      type: String,
-      required: true,
-      default: "https://unsplash.com/photos/lighthouse-stands-tall-on-a-rocky-coastline-QdDg2X_2gj0"
-
-  },
+      url:String,
+      filename:String
+    },
     price:Number,
     location:String,
     country:String,

@@ -2,11 +2,9 @@ const express = require("express");
 const router = express.Router({mergeParams: true});
 const ExpressError = require("../utils/ExpressError.js")
 const wrapasync = require("../utils/wrapasync.js")
-const { listingSchema, reviewSchema } = require("../schema.js");
-const listing = require("../models/listing.js")
-const review = require("../models/review")
-const { loginRequired, isowner ,isreviewauthor} = require("../utils/middleware.js");
-
+const { loginRequired,isreviewauthor} = require("../utils/middleware.js");
+const reviewController = require("../controller/review.js");
+const { reviewSchema } = require("../schema.js");
 
 const validateReview = (req, res, next) => {
     const { error } = reviewSchema.validate(req.body);  
@@ -18,26 +16,9 @@ const validateReview = (req, res, next) => {
 }
 
 /*reviews route*/
-router.post("/",loginRequired,validateReview,wrapasync(async(req,res)=>{
-    let {id} = req.params;
-    let listingfound = await listing.findById(id);
-    let newreview = new review(req.body.review); //this is inserting but in new way
-    newreview.author = req.user._id; // associate the review with the logged-in user
-    listingfound.reviews.push(newreview);
-    await newreview.save();
-    await listingfound.save();
-    req.flash("success", "Review added successfully!");
-    res.redirect(`/listings/${id}`) // Redirect to the listing's show page after adding the review;
-}))
-
+router.post("/",loginRequired,validateReview,wrapasync(reviewController.review));
 
 /*delete review route*/
-router.delete("/:reviewId",loginRequired,isreviewauthor,wrapasync(async(req,res)=>{
-    let {id, reviewId} = req.params;
-    await listing.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
-    await review.findByIdAndDelete(reviewId);
-    req.flash("success", "Review deleted successfully!");
-    res.redirect(`/listings/${id}`) 
-    }))
+router.delete("/:reviewId",loginRequired,isreviewauthor,wrapasync(reviewController.deleteReview));
 
 module.exports = router;
