@@ -17,3 +17,7 @@
     }, false)
   })
 })()
+
+
+
+// used for bootstrap validation this are predefined code
