@@ -1,6 +1,6 @@
 # 🏔️ AlphineHut
 
-A modern full-stack hotel listing platform inspired by Airbnb, built using the MERN backend ecosystem. Users can explore, create, edit, and review hotel listings with secure authentication and image uploads.
+A modern full-stack hotel listing platform , built using the MERN backend ecosystem. Users can explore, create, edit, and review hotel listings with secure authentication and image uploads.
 
 ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
 ![Express.js](https://img.shields.io/badge/Express.js-404D59?style=for-the-badge)
@@ -16,9 +16,15 @@ A modern full-stack hotel listing platform inspired by Airbnb, built using the M
 
 AlphineHut is a full-stack hotel listing application where users can browse accommodations, create their own listings, upload property images, write reviews, and securely manage their accounts.
 
+## 🌐 Live Demo
+🔗 https://alphinehut.onrender.com
+> **Note:** This project is hosted on Render's free tier. The first request after inactivity may take 30–60 seconds while the server wakes up.
+
+
 The project follows RESTful architecture and implements secure authentication, authorization, server-side validation, and cloud image storage to provide a production-ready web application.
 
 ---
+
 
 # 🚀 Features
 
@@ -109,14 +115,20 @@ The project follows RESTful architecture and implements secure authentication, a
 
 ```
 Home Page
+<img width="1918" height="907" alt="image" src="https://github.com/user-attachments/assets/dfd6adc8-5b2a-4973-84aa-21d16e75ba68" />
 
 Listing Details
+<img width="1913" height="896" alt="image" src="https://github.com/user-attachments/assets/bceaa80a-4c71-469d-afc2-cdbf743546a5" />
 
 Login Page
+<img width="1915" height="909" alt="image" src="https://github.com/user-attachments/assets/cd356e51-7028-4a06-b385-1dab4d0c8cd2" />
 
 Create Listing
+<img width="1916" height="908" alt="image" src="https://github.com/user-attachments/assets/7d67db23-3b01-4cdf-ac61-19fea422d54b" />
 
 Review Section
+<img width="1872" height="607" alt="image" src="https://github.com/user-attachments/assets/a7418d17-2eb1-4075-8d77-017eb21ff77c" />
+
 ```
 
 ---
