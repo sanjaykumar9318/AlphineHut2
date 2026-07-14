@@ -146,7 +146,7 @@ CLOUD_API_SECRET=Your Cloudinary API Secret
 Run
 
 ```bash
-npm start
+node app.js
 ```
 
 Open
