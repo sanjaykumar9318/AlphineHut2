@@ -193,9 +193,9 @@ http://localhost:8080
 
 📧 sanjayswiz26@gmail.com
 
-🔗 LinkedIn: https://linkedin.com/in/your-profile
+🔗 LinkedIn: https://www.linkedin.com/in/sanjay-kumar-s-5560672b8/
 
-💻 GitHub: https://github.com/your-github
+💻 GitHub: https://github.com/sanjaykumar9318
 
 ---
 
