@@ -11,7 +11,7 @@ const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
     folder: 'ALphineHut_development',
-    allowed_formats: ['png', 'jpg', 'jpeg'] // ✅ multiple formats allowed
+    allowed_formats: ['png', 'jpg', 'jpeg'] 
   }
 });
 

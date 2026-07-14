@@ -12,7 +12,7 @@ module.exports.new = (req,res)=>{
 
 module.exports.show = async(req,res)=>{
     let {id} = req.params;
-    const list = await listing.findById(id).populate({path:"reviews",populate:{path:"author"}}).populate("owner"); // Populate the owner field to get user details
+    const list = await listing.findById(id).populate({path:"reviews",populate:{path:"author"}}).populate("owner"); 
     // console.log(list)
     if(!list){
         req.flash("error", "Listing not found!");

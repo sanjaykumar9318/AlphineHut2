@@ -15,10 +15,10 @@ const validateReview = (req, res, next) => {
     next();
 }
 
-/*reviews route*/
+
 router.post("/",loginRequired,validateReview,wrapasync(reviewController.review));
 
-/*delete review route*/
+
 router.delete("/:reviewId",loginRequired,isreviewauthor,wrapasync(reviewController.deleteReview));
 
 module.exports = router;

@@ -1,4 +1,4 @@
-if(!process.env.NODE_ENV!="production"){
+if(process.env.NODE_ENV!="production"){
     // This line is used to load environment variables from a .env file into process.env.SECRET
     require('dotenv').config()
 }
@@ -21,7 +21,8 @@ const user = require("./models/user.js")
 const LocalStrategy = require("passport-local")
 const userRoutes = require("./routes/user.js")
 const multer  = require('multer')
-const upload = multer({ dest: 'uploads/' })
+const {storage} = require("./cloudconfig.js")
+const upload = multer({ storage})
 
 
 
@@ -56,8 +57,8 @@ const sessionOptions = {
     resave: false,  
     saveUninitialized: true,
     cookie:{
-        expires: Date.now() + 1000 * 60 * 60 * 24 * 7 ,// 7 day
-        maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days,
+        expires: Date.now() + 1000 * 60 * 60 * 24 * 7 ,
+        maxAge: 1000 * 60 * 60 * 24 * 7, 
         httponly: true, // Helps prevent XSS attacks
 }}
 
@@ -69,7 +70,7 @@ app.use(passport.initialize());
 app.use(passport.session()); // use to identify the user as they browse from page to page.the series of reponse each associated with same user is called session.
 passport.use(new LocalStrategy(user.authenticate())); // authenticate the user using passport-local strategy
 passport.serializeUser(user.serializeUser()); // serialize the user to store in session
-passport.deserializeUser(user.deserializeUser()); // deserialize the user from session
+passport.deserializeUser(user.deserializeUser()); // fetches user id from session get data and puts in req.user
 
 
 async function main(){
@@ -85,7 +86,7 @@ main().then(()=>{
 app.use((req, res, next) => {
     res.locals.success = req.flash("success");
     res.locals.error = req.flash("error");
-    res.locals.currentuser = req.user;
+    res.locals.currentuser = req.user; //to show login logout btn
     next();
 })
 

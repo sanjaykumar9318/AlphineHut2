@@ -31,19 +31,17 @@ router
     .get(wrapasync (listingcontroller.index))
     .post(loginRequired,upload.single("listing[image]"),wrapasync(listingcontroller.create));
 
-/*new route*/
+
 router.get("/new",loginRequired,listingcontroller.new);
 
-/*show route*/
-/*update route*/
-/*delete route*/
+
 router
     .route("/:id")
     .get(listingcontroller.show)
     .put(loginRequired,isowner,upload.single("listing[image]"),validatelisting,wrapasync (listingcontroller.update))
     .delete(loginRequired,isowner,wrapasync (listingcontroller.delete))
 
-/*edit route*/
+
 router.get("/:id/edit",loginRequired,isowner,wrapasync (listingcontroller.edit));
 
 module.exports = router;

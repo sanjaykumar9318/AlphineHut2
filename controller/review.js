@@ -10,13 +10,13 @@ const reviewController = require("../controller/review.js");
 module.exports.review = async(req,res)=>{
     let {id} = req.params;
     let listingfound = await listing.findById(id);
-    let newreview = new review(req.body.review); //this is inserting but in new way
-    newreview.author = req.user._id; // associate the review with the logged-in user
+    let newreview = new review(req.body.review); 
+    newreview.author = req.user._id; 
     listingfound.reviews.push(newreview);
     await newreview.save();
     await listingfound.save();
     req.flash("success", "Review added successfully!");
-    res.redirect(`/listings/${id}`) // Redirect to the listing's show page after adding the review;
+    res.redirect(`/listings/${id}`) 
 }
 
 module.exports.deleteReview = async(req,res)=>{
