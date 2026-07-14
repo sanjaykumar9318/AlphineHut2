@@ -109,30 +109,6 @@ The project follows RESTful architecture and implements secure authentication, a
 
 ---
 
-# 📸 Screenshots
-
-> Add screenshots here
-
-```
-Home Page
-<img width="1918" height="907" alt="image" src="https://github.com/user-attachments/assets/dfd6adc8-5b2a-4973-84aa-21d16e75ba68" />
-
-Listing Details
-<img width="1913" height="896" alt="image" src="https://github.com/user-attachments/assets/bceaa80a-4c71-469d-afc2-cdbf743546a5" />
-
-Login Page
-<img width="1915" height="909" alt="image" src="https://github.com/user-attachments/assets/cd356e51-7028-4a06-b385-1dab4d0c8cd2" />
-
-Create Listing
-<img width="1916" height="908" alt="image" src="https://github.com/user-attachments/assets/7d67db23-3b01-4cdf-ac61-19fea422d54b" />
-
-Review Section
-<img width="1872" height="607" alt="image" src="https://github.com/user-attachments/assets/a7418d17-2eb1-4075-8d77-017eb21ff77c" />
-
-```
-
----
-
 # ⚙ Installation
 
 Clone the repository
