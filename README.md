@@ -99,22 +99,7 @@ The project follows RESTful architecture and implements secure authentication, a
 
 ---
 
-# 📂 Folder Structure
 
-```
-AlphineHut
-│
-├── models
-├── routes
-├── controllers
-├── middleware
-├── utils
-├── public
-├── views
-├── cloudConfig.js
-├── app.js
-└── package.json
-```
 
 ---
 
@@ -141,7 +126,7 @@ Review Section
 Clone the repository
 
 ```bash
-git clone https://github.com/yourusername/AlphineHut.git
+git clone https://github.com/sanjaykumar9318/AlphineHut2
 ```
 
 Move into project
