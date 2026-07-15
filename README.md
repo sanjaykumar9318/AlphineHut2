@@ -114,7 +114,7 @@ The project follows RESTful architecture and implements secure authentication, a
 Clone the repository
 
 ```bash
-git clone https://github.com/sanjaykumar9318/AlphineHut2
+https://github.com/sanjaykumar9318/AlphineHut2.git
 ```
 
 Move into project
