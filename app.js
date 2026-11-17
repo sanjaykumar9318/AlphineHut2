@@ -66,10 +66,11 @@ const sessionOptions = {
 app.use(session(sessionOptions));
 app.use(flash());
 
-app.use(passport.initialize());
-app.use(passport.session()); // use to identify the user as they browse from page to page.the series of reponse each associated with same user is called session.
-passport.use(new LocalStrategy(user.authenticate())); // authenticate the user using passport-local strategy
-passport.serializeUser(user.serializeUser()); // serialize the user to store in session
+app.use(passport.initialize())//Activate Passport middleware for all incm req
+app.use(passport.session()); // use to identify the user as they browse from page to page and if sesion ther restore loged in user
+passport.use(new LocalStrategy(user.authenticate())); // Whenever someone calls passport.authenticate("local"), use user.authenticate() to verify the username and password.
+//user.authenticate() is used to take usernaem and Verifies username & password against the database and returns the authenticated user.
+passport.serializeUser(user.serializeUser()); // serialize the user to store in session, runs once after sufesul login and ecide waht to store in session
 passport.deserializeUser(user.deserializeUser()); // fetches user id from session get data and puts in req.user
 
 
