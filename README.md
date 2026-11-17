@@ -1,6 +1,6 @@
 # 🏔️ AlphineHut
 
-A modern full-stack hotel listing platform inspired by Airbnb, built using the MERN backend ecosystem. Users can explore, create, edit, and review hotel listings with secure authentication and image uploads.
+A modern full-stack hotel listing platform , built using the MERN backend ecosystem. Users can explore, create, edit, and review hotel listings with secure authentication and image uploads.
 
 ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
 ![Express.js](https://img.shields.io/badge/Express.js-404D59?style=for-the-badge)
@@ -16,9 +16,15 @@ A modern full-stack hotel listing platform inspired by Airbnb, built using the M
 
 AlphineHut is a full-stack hotel listing application where users can browse accommodations, create their own listings, upload property images, write reviews, and securely manage their accounts.
 
+## 🌐 Live Demo
+🔗 https://alphinehut.onrender.com
+> **Note:** This project is hosted on Render's free tier. The first request after inactivity may take 30–60 seconds while the server wakes up.
+
+
 The project follows RESTful architecture and implements secure authentication, authorization, server-side validation, and cloud image storage to provide a production-ready web application.
 
 ---
+
 
 # 🚀 Features
 
@@ -103,30 +109,12 @@ The project follows RESTful architecture and implements secure authentication, a
 
 ---
 
-# 📸 Screenshots
-
-> Add screenshots here
-
-```
-Home Page
-
-Listing Details
-
-Login Page
-
-Create Listing
-
-Review Section
-```
-
----
-
 # ⚙ Installation
 
 Clone the repository
 
 ```bash
-git clone https://github.com/sanjaykumar9318/AlphineHut2
+https://github.com/sanjaykumar9318/AlphineHut2.git
 ```
 
 Move into project
@@ -158,7 +146,7 @@ CLOUD_API_SECRET=Your Cloudinary API Secret
 Run
 
 ```bash
-npm start
+node app.js
 ```
 
 Open
@@ -205,9 +193,9 @@ http://localhost:8080
 
 📧 sanjayswiz26@gmail.com
 
-🔗 LinkedIn: https://linkedin.com/in/your-profile
+🔗 LinkedIn: https://www.linkedin.com/in/sanjay-kumar-s-5560672b8/
 
-💻 GitHub: https://github.com/your-github
+💻 GitHub: https://github.com/sanjaykumar9318
 
 ---
 
